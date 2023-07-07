@@ -3,11 +3,6 @@
 
 #include <Arduino.h>
 
-extern float g_left_motor_volts;
-extern float g_right_motor_volts;
-
-//***************************************************************************//
-
 void enable_motor_controllers();
 void disable_motor_controllers();
 void reset_motor_controllers();
@@ -51,14 +46,5 @@ void set_motor_pwm_frequency(int frequency = PWM_31250_HZ);
  */
 void set_left_motor_pwm(int pwm);
 void set_right_motor_pwm(int pwm);
-
-/***
- * The input voltage be any value and will be scaled to compensate for changes
- * in battery voltage such that maximum drive to the motors is limited to the
- * value of MAX_MOTOR_VOLTS in the defaults (normally +/- 6.0 Volts)
- * @brief adjust the motor PWM to deliver the given volate to the motor
- */
-void set_left_motor_volts(float volts);
-void set_right_motor_volts(float volts);
 
 #endif

@@ -1,14 +1,7 @@
 #include "motors.h"
+#include "config.h"
 #include "digitalWriteFast.h"
-#include "encoders.h"
-#include "profile.h"
-#include "sensors.h"
-#include "settings.h"
 #include <Arduino.h>
-
-// these are maintained only for logging
-float g_left_motor_volts;
-float g_right_motor_volts;
 
 static bool s_controllers_output_enabled;
 static float s_old_fwd_error;
