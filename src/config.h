@@ -3,6 +3,9 @@
 
 #include <Arduino.h>
 
+// Defaults
+const uint32_t BAUDRATE = 115200;
+
 // Hardware mapping
 const uint8_t USER_IO = 6;
 const uint8_t LED_RIGHT = 6; // an alias for USER_IO
@@ -17,5 +20,10 @@ const uint8_t EMITTER = 12; // alias for pin 12
 
 const uint8_t FUNCTION_PIN = A6;
 const uint8_t BATTERY_VOLTS = A7;
+
+const int MOTOR_LEFT_POLARITY = (1);
+const int MOTOR_RIGHT_POLARITY = (1);
+
+const float MAX_MOTOR_VOLTS = 6.0;
 
 #endif
