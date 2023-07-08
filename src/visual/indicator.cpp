@@ -1,4 +1,5 @@
 #include "config.h"
+#include "debug.h"
 #include "lib/digitalWriteFast.h"
 #include <Arduino.h>
 
@@ -26,8 +27,18 @@ void indicators_test()
 {
     if ((millis() / 1000) % 2)
     {
+        if (digitalRead(LED_LEFT) == LOW)
+        {
+            Serial.println("Active Indicator: LEFT");
+        }
+
         indicator_left();
         return;
+    }
+
+    if (digitalRead(LED_RIGHT) == LOW)
+    {
+        Serial.println("Active Indicator: RIGHT");
     }
 
     indicator_right();
