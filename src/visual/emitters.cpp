@@ -1,21 +1,18 @@
+#include <Arduino.h>
+
 #include "config.h"
 #include "debug.h"
 #include "lib/digitalWriteFast.h"
-#include <Arduino.h>
 
-void setup_emitters()
-{
+void setup_emitters() {
     pinMode(EMITTER, OUTPUT);
     digitalWriteFast(EMITTER, LOW);
 }
 
-void emitters_test()
-{
-    if ((millis() / 300) % 2)
-    {
-        if (digitalRead(EMITTER) == LOW)
-        {
-            Serial.println("Emitters: ON");
+void emitters_test() {
+    if ((millis() / DEBUG_INTERVAL) % 2) {
+        if (digitalRead(EMITTER) == LOW) {
+            log_message("Emitters: ON");
         }
 
         digitalWriteFast(EMITTER, HIGH);
@@ -23,9 +20,8 @@ void emitters_test()
         return;
     }
 
-    if (digitalRead(EMITTER) == HIGH)
-    {
-        Serial.println("Emitters: OFF");
+    if (digitalRead(EMITTER) == HIGH) {
+        log_message("Emitters: OFF");
     }
 
     digitalWriteFast(EMITTER, LOW);

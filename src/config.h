@@ -22,11 +22,12 @@ const uint8_t LED_LEFT = 11;
 // Emitters
 const uint8_t EMITTER = 12;
 
-const uint8_t USER_IO = 6;
-const uint8_t EMITTER_A = 11;
-const uint8_t EMITTER_B = 12;
-
-const uint8_t FUNCTION_PIN = A6;
-const uint8_t BATTERY_VOLTS = A7;
+// Sensors
+const uint8_t SENSOR_0 = A0;
+const uint8_t SENSOR_1 = A1;
+const uint8_t SENSOR_2 = A2;
+const uint8_t SENSOR_3 = A3;
+const uint8_t SENSOR_4 = A4;
+const uint8_t SENSOR_5 = A5;
 
 #endif

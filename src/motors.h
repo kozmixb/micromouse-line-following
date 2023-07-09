@@ -1,12 +1,7 @@
 #ifndef MOTORS_H
 #define MOTORS_H
 
-enum
-{
-    PWM_488_HZ,
-    PWM_3906_HZ,
-    PWM_31250_HZ
-};
+enum { PWM_488_HZ, PWM_3906_HZ, PWM_31250_HZ };
 
 void setup_motors();
 void set_motor_pwm_frequency(int frequency = PWM_31250_HZ);
