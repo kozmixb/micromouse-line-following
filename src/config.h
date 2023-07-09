@@ -23,11 +23,12 @@ const uint8_t LED_LEFT = 11;
 const uint8_t EMITTER = 12;
 
 // Sensors
-const uint8_t SENSOR_0 = A0;
-const uint8_t SENSOR_1 = A1;
-const uint8_t SENSOR_2 = A2;
-const uint8_t SENSOR_3 = A3;
+const uint8_t LINE_SENSOR_RIGHT = A0;
+const uint8_t LINE_SENSOR_FRONT_RIGHT = A1;
+const uint8_t LINE_SENSOR_FRONT_LEFT = A2;
+const uint8_t LINE_SENSOR_LEFT = A3;
 const uint8_t SENSOR_4 = A4;
 const uint8_t SENSOR_5 = A5;
+const uint8_t SENSOR_INTERVAL = 500;
 
 #endif

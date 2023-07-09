@@ -9,20 +9,24 @@ void setup_emitters() {
     digitalWriteFast(EMITTER, LOW);
 }
 
+void emitters_on() {
+    if (digitalRead(EMITTER) == LOW) {
+        log_message("Emitters: ON");
+        digitalWriteFast(EMITTER, HIGH);
+    }
+}
+void emitters_off() {
+    if (digitalRead(EMITTER) == HIGH) {
+        log_message("Emitters: OFF");
+        digitalWriteFast(EMITTER, LOW);
+    }
+}
+
 void emitters_test() {
     if ((millis() / DEBUG_INTERVAL) % 2) {
-        if (digitalRead(EMITTER) == LOW) {
-            log_message("Emitters: ON");
-        }
-
-        digitalWriteFast(EMITTER, HIGH);
-
+        emitters_on();
         return;
     }
 
-    if (digitalRead(EMITTER) == HIGH) {
-        log_message("Emitters: OFF");
-    }
-
-    digitalWriteFast(EMITTER, LOW);
+    emitters_off();
 }
