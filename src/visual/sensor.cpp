@@ -10,6 +10,10 @@ Sensor::Sensor(const uint8_t pin) : _pin(pin), _min(1024), _max(0) {
 
 void Sensor::calibrate() { read_raw(); }
 
+void Sensor::update(int value) { _value = value; }
+
+uint8_t Sensor::pin() { return _pin; }
+
 byte Sensor::read() { return map(read_raw(), _min, _max, 0, 100); }
 
 int Sensor::read_raw() {

@@ -7,6 +7,12 @@
 #include "emitters.h"
 #include "sensor.h"
 
+static Sensors& Sensors::instance() {
+    static Sensors INSTANCE;
+
+    return INSTANCE;
+}
+
 Sensors::Sensors()
     : sensor_right(LINE_SENSOR_RIGHT),
       sensor_front_right(LINE_SENSOR_FRONT_RIGHT),

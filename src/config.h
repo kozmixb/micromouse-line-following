@@ -29,6 +29,9 @@ const uint8_t LINE_SENSOR_FRONT_LEFT = A2;
 const uint8_t LINE_SENSOR_LEFT = A3;
 const uint8_t SENSOR_4 = A4;
 const uint8_t SENSOR_5 = A5;
-const uint8_t SENSOR_INTERVAL = 500;
+const uint8_t SENSOR_INTERVAL = 255;
+
+const uint8_t FUNCTION_PIN = A6;
+const uint8_t BATTERY_VOLTS = A7;
 
 #endif

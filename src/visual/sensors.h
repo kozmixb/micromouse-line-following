@@ -7,7 +7,7 @@
 
 class Sensors {
    public:
-    Sensors();
+    static Sensors& instance();
     void calibrate();
     void test();
     Sensor right();
@@ -16,6 +16,7 @@ class Sensors {
     Sensor left();
 
    private:
+    Sensors();
     Sensor sensor_right;
     Sensor sensor_front_right;
     Sensor sensor_front_left;

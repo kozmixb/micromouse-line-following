@@ -7,8 +7,6 @@
 #include "visual/indicator.h"
 #include "visual/sensors.h"
 
-Sensors sensors;
-
 void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
 
@@ -16,16 +14,15 @@ void setup() {
     setup_motors();
     setup_indicators();
     setup_emitters();
-    Sensors sensors();
 }
 
 void loop() {
     // indicators_test();
     if (millis() < 10000) {
-        sensors.calibrate();
+        Sensors::instance().calibrate();
         return;
     }
 
-    sensors.test();
+    Sensors::instance().test();
     log_new_line();
 }
