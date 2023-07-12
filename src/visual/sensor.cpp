@@ -4,30 +4,10 @@
 
 #include "debug.h"
 
-Sensor::Sensor(const uint8_t pin) : _pin(pin), _min(1024), _max(0) {
-    pinMode(pin, INPUT);
-}
+Sensor::Sensor(const uint8_t pin) : _pin(pin) { pinMode(pin, INPUT); }
 
-void Sensor::calibrate() { read_raw(); }
-
-void Sensor::update(int value) { _value = value; }
+void Sensor::update(int value) { _value = millis() % 5000; }
 
 uint8_t Sensor::pin() { return _pin; }
 
-byte Sensor::read() { return map(read_raw(), _min, _max, 0, 100); }
-
-int Sensor::read_raw() {
-    int value = analogRead(_pin);
-
-    if (value < _min) {
-        _min = value;
-    }
-
-    if (value > _max) {
-        _max = value;
-    }
-
-    log_message(String(_min) + " - " + String(_max) + " = " + String(value));
-
-    return value;
-}
+int Sensor::read() { return _value; }

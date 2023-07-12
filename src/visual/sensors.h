@@ -8,8 +8,8 @@
 class Sensors {
    public:
     static Sensors& instance();
-    void calibrate();
     void test();
+    void enable();
     Sensor right();
     Sensor front_right();
     Sensor front_left();
@@ -21,6 +21,7 @@ class Sensors {
     Sensor sensor_front_right;
     Sensor sensor_front_left;
     Sensor sensor_left;
+    bool sensors_enabled = false;
 };
 
 #endif

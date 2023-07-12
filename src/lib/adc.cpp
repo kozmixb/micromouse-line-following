@@ -7,7 +7,7 @@
 #include "visual/emitters.h"
 #include "visual/sensors.h"
 
-static volatile int adc[6];
+static volatile int adc[4];
 static uint8_t sensor_phase = 0;
 static const uint8_t ADC_REF = DEFAULT;
 
@@ -55,6 +55,13 @@ static int get_adc_result() {
     return (high << 8) | low;
 }
 
+void update_sensors() {
+    Sensors::instance().right().update(adc[0]);
+    Sensors::instance().front_right().update(adc[1]);
+    Sensors::instance().front_left().update(adc[2]);
+    Sensors::instance().left().update(adc[3]);
+}
+
 void start_sensor_cycle() {
     emitters_off();
     sensor_phase = 0;      // sync up the start of the sensor sequence
@@ -82,25 +89,27 @@ ISR(ADC_vect) {
         case DARK_LEFT:
             adc[3] = get_adc_result();
             emitters_on();
+            start_adc(0);
             break;
         case EMITTERS_ON:
             start_adc(Sensors::instance().right().pin());
             break;
         case BRIGHT_RIGHT:
-            Sensors::instance().right().update(get_adc_result() - adc[0]);
+            adc[0] = get_adc_result() - adc[0];
             start_adc(Sensors::instance().front_right().pin());
             break;
         case BRIGHT_FRONT_RIGHT:
-            Sensors::instance().front_right().update(get_adc_result() - adc[1]);
+            adc[1] = get_adc_result() - adc[1];
             start_adc(Sensors::instance().front_left().pin());
             break;
         case BRIGHT_FRONT_LEFT:
-            Sensors::instance().front_left().update(get_adc_result() - adc[2]);
+            adc[2] = get_adc_result() - adc[2];
             start_adc(Sensors::instance().left().pin());
             break;
         case BRIGHT_LEFT:
-            Sensors::instance().left().update(get_adc_result() - adc[3]);
+            adc[3] = get_adc_result() - adc[3];
             emitters_off();
+            bitClear(ADCSRA, ADIE);
             break;
         default:
             // should never get this far
