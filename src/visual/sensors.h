@@ -10,10 +10,10 @@ class Sensors {
     static Sensors& instance();
     void test();
     void enable();
-    Sensor right();
-    Sensor front_right();
-    Sensor front_left();
-    Sensor left();
+    Sensor& right();
+    Sensor& front_right();
+    Sensor& front_left();
+    Sensor& left();
 
    private:
     Sensors();

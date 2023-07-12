@@ -33,10 +33,10 @@ void Sensors::test() {
     }
 }
 
-Sensor Sensors::right() { return sensor_right; }
+Sensor& Sensors::right() { return sensor_right; }
 
-Sensor Sensors::front_right() { return sensor_front_right; }
+Sensor& Sensors::front_right() { return sensor_front_right; }
 
-Sensor Sensors::front_left() { return sensor_front_left; }
+Sensor& Sensors::front_left() { return sensor_front_left; }
 
-Sensor Sensors::left() { return sensor_left; }
+Sensor& Sensors::left() { return sensor_left; }

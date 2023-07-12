@@ -6,7 +6,7 @@
 
 Sensor::Sensor(const uint8_t pin) : _pin(pin) { pinMode(pin, INPUT); }
 
-void Sensor::update(int value) { _value = millis() % 5000; }
+void Sensor::update(int value) { _value = value; }
 
 uint8_t Sensor::pin() { return _pin; }
 

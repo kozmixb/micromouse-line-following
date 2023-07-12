@@ -95,19 +95,19 @@ ISR(ADC_vect) {
             start_adc(Sensors::instance().right().pin());
             break;
         case BRIGHT_RIGHT:
-            adc[0] = get_adc_result() - adc[0];
+            adc[0] = adc[0] - get_adc_result();
             start_adc(Sensors::instance().front_right().pin());
             break;
         case BRIGHT_FRONT_RIGHT:
-            adc[1] = get_adc_result() - adc[1];
+            adc[1] = adc[1] - get_adc_result();
             start_adc(Sensors::instance().front_left().pin());
             break;
         case BRIGHT_FRONT_LEFT:
-            adc[2] = get_adc_result() - adc[2];
+            adc[2] = adc[2] - get_adc_result();
             start_adc(Sensors::instance().left().pin());
             break;
         case BRIGHT_LEFT:
-            adc[3] = get_adc_result() - adc[3];
+            adc[3] = adc[3] - get_adc_result();
             emitters_off();
             bitClear(ADCSRA, ADIE);
             break;
