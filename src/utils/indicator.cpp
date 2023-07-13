@@ -4,7 +4,7 @@
 #include "config.h"
 #include "debug.h"
 
-void setup_indicators() {
+void enable_indicators() {
     pinMode(LED_RIGHT, OUTPUT);
     pinMode(LED_LEFT, OUTPUT);
     digitalWriteFast(LED_RIGHT, LOW);

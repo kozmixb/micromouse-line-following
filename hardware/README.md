@@ -10,8 +10,8 @@ There are some components I changed around because of availability of those.
 | Ref | Value | Qty | Note |
 | --- | --- | --- | --- |
 | C1 | 100nF | 1 | BOJACK 104 |
-| C2, C3 | 330uF, 16V | 2 | TBC |
-| D1 | 1N5401 | 1 | TBC |
+| C2, C3 | 330uF, 16V | 2 | |
+| D1 | 1N5401 | 1 | |
 | D3 | 1N5817 | 1 | Shotty 1A 20V |
 | IC1 | SN74HC86N | 1 | 2V to 6V, DIP-13 |
 | M1, M2 | N20 Motor | 2 | Geared 200RPM |

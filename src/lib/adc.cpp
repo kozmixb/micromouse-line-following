@@ -1,5 +1,4 @@
 #include <Arduino.h>
-// #include <util/atomic.h>
 #include <digitalWriteFast.h>
 #include <wiring_private.h>
 
@@ -64,10 +63,12 @@ void update_sensors() {
 
 void start_sensor_cycle() {
     emitters_off();
-    sensor_phase = 0;      // sync up the start of the sensor sequence
+    sensor_phase = 0;
     bitSet(ADCSRA, ADIE);  // enable the ADC interrupt
     start_adc(0);          // begin a conversion to get things started
 }
+
+static void stop_sensor_cycle() { bitClear(ADCSRA, ADIE); }
 
 ISR(ADC_vect) {
     switch (sensor_phase) {
@@ -109,10 +110,7 @@ ISR(ADC_vect) {
         case BRIGHT_LEFT:
             adc[3] = adc[3] - get_adc_result();
             emitters_off();
-            bitClear(ADCSRA, ADIE);
-            break;
-        default:
-            // should never get this far
+            stop_sensor_cycle();
             break;
     }
 
