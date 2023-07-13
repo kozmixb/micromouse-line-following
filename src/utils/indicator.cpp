@@ -1,8 +1,8 @@
 #include <Arduino.h>
+#include <digitalWriteFast.h>
 
 #include "config.h"
 #include "debug.h"
-#include "lib/digitalWriteFast.h"
 
 void setup_indicators() {
     pinMode(LED_RIGHT, OUTPUT);
@@ -18,6 +18,11 @@ void indicator_right() {
 
 void indicator_left() {
     digitalWriteFast(LED_LEFT, HIGH);
+    digitalWriteFast(LED_RIGHT, LOW);
+}
+
+void indicators_off() {
+    digitalWriteFast(LED_LEFT, LOW);
     digitalWriteFast(LED_RIGHT, LOW);
 }
 

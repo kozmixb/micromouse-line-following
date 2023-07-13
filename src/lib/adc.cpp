@@ -1,9 +1,9 @@
 #include <Arduino.h>
 // #include <util/atomic.h>
+#include <digitalWriteFast.h>
 #include <wiring_private.h>
 
 #include "config.h"
-#include "digitalWriteFast.h"
 #include "visual/emitters.h"
 #include "visual/sensors.h"
 

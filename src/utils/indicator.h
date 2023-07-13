@@ -5,6 +5,7 @@ void setup_indicators();
 
 void indicator_right();
 void indicator_left();
+void indicators_off();
 void indicators_test();
 
 #endif

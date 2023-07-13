@@ -1,10 +1,10 @@
 #include "motors.h"
 
 #include <Arduino.h>
+#include <digitalWriteFast.h>
 
 #include "config.h"
 #include "debug.h"
-#include "lib/digitalWriteFast.h"
 
 void setup_motors() {
     pinMode(MOTOR_LEFT_DIR, OUTPUT);

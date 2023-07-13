@@ -1,7 +1,7 @@
 #include <Arduino.h>
+#include <digitalWriteFast.h>
 
 #include "config.h"
-#include "lib/digitalWriteFast.h"
 
 void setup_emitters() {
     pinMode(EMITTER, OUTPUT);

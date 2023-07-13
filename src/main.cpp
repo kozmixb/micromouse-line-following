@@ -4,8 +4,8 @@
 #include "debug.h"
 #include "lib/adc.h"
 #include "motors.h"
+#include "utils/indicator.h"
 #include "visual/emitters.h"
-#include "visual/indicator.h"
 #include "visual/sensors.h"
 
 void setup() {
