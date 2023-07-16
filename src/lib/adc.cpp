@@ -65,7 +65,7 @@ void update_sensors() {
 
 void update_battery() { update_battery_voltage(adc[0]); }
 
-void update_switch() { update_switch_status(adc[0]); }
+void update_switch() { update_switch_status(adc[5]); }
 
 void start_sensor_cycle() {
     emitters_off();

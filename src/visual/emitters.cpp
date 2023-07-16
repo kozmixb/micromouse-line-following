@@ -3,18 +3,23 @@
 
 #include "config.h"
 
+static bool enabled = false;
+
 void setup_emitters() {
     pinMode(EMITTER, OUTPUT);
     digitalWriteFast(EMITTER, LOW);
 }
 
+void emitters_enable() { enabled = true; }
+void emitters_disable() { enabled = false; }
+
 void emitters_on() {
-    if (digitalRead(EMITTER) == LOW) {
+    if (digitalRead(EMITTER) == LOW && enabled) {
         digitalWriteFast(EMITTER, HIGH);
     }
 }
 void emitters_off() {
-    if (digitalRead(EMITTER) == HIGH) {
+    if (digitalRead(EMITTER) == HIGH && enabled) {
         digitalWriteFast(EMITTER, LOW);
     }
 }

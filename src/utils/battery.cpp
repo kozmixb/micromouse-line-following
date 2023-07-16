@@ -5,7 +5,6 @@ static float voltage = 0.0;
 static float scale = 0.0;
 
 void update_battery_voltage(float reading) {
-    // Serial.println(String(reading));
     voltage = BATTERY_MULTIPLIER * reading;
     scale = 255.0 / voltage;
 }

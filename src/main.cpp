@@ -1,12 +1,15 @@
-#include "config.h"
+#include <Arduino.h>
+
 #include "debug.h"
 #include "interrupts.h"
-#include "lib/adc.h"
 #include "motors.h"
-#include "utils/battery.h"
+#include "process.h"
 #include "utils/indicator.h"
+#include "utils/switch.h"
 #include "visual/emitters.h"
 #include "visual/sensors.h"
+
+byte active_profile = 255;
 
 void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
@@ -15,14 +18,19 @@ void setup() {
     setup_motors();
     enable_indicators();
     setup_emitters();
-    setup_adc();
     enable_timer_interrupt();
+    delay(150);
 }
 
 void loop() {
-    Sensors::instance().enable();
-    Sensors::instance().log();
+    if (button_pressed()) {
+        run_profile(255);
+        wait_for_button_release();
+        delay(150);
 
-    log_battery();
+        active_profile = get_profile_version();
+    }
+
+    run_profile(active_profile);
     print_message();
 }

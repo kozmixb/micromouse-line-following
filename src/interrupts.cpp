@@ -14,6 +14,8 @@ void enable_timer_interrupt() {
     bitSet(TIMSK2, OCIE2A);
 }
 
+void disable_timer_interrupt() { bitClear(TIMSK2, OCIE2A); }
+
 ISR(TIMER2_COMPA_vect, ISR_NOBLOCK) {
     update_sensors();
     update_switch();
