@@ -23,11 +23,10 @@ void Sensors::enable() {
 }
 
 void Sensors::log() {
-    add_message(String("sensor_left"), String(sensor_left.read()));
-    add_message(String("sensor_front_left"), String(sensor_front_left.read()));
-    add_message(String("sensor_front_right"),
-                String(sensor_front_right.read()));
-    add_message(String("sensor_right"), String(sensor_right.read()));
+    add_message(String("sensor_left"), sensor_left.read());
+    add_message(String("sensor_front_left"), sensor_front_left.read());
+    add_message(String("sensor_front_right"), sensor_front_right.read());
+    add_message(String("sensor_right"), sensor_right.read());
 }
 
 Sensor& Sensors::right() { return sensor_right; }

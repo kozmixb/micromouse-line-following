@@ -19,7 +19,7 @@ void update_switch_status(int adc) {
     current = 255;
 }
 
-void log_switch() { add_message(String("profile"), String(current)); }
+void log_switch() { add_message(String("profile"), current); }
 
 bool button_pressed() { return current == 0; }
 
