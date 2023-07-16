@@ -68,9 +68,9 @@ void set_motor_pwm_frequency(int frequency) {
 }
 
 void motors_test() {
-    if ((millis() / DEBUG_INTERVAL) % 2) {
+    if ((millis() / 500) % 2) {
         if (digitalRead(MOTOR_RIGHT_DIR) == 255) {
-            log_message("Spint direction: LEFT");
+            add_message(String("motor_direction"), String("RIGHT"));
         }
 
         set_left_motor_pwm(-255);
@@ -80,7 +80,7 @@ void motors_test() {
     }
 
     if (digitalRead(MOTOR_LEFT_DIR) == 255) {
-        log_message("Spint direction: LEFT");
+        add_message(String("motor_direction"), String("LEFT"));
     }
 
     set_left_motor_pwm(255);

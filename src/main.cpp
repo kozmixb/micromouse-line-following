@@ -3,6 +3,7 @@
 #include "interrupts.h"
 #include "lib/adc.h"
 #include "motors.h"
+#include "utils/battery.h"
 #include "utils/indicator.h"
 #include "visual/emitters.h"
 #include "visual/sensors.h"
@@ -20,6 +21,8 @@ void setup() {
 
 void loop() {
     Sensors::instance().enable();
-    Sensors::instance().test();
-    log_new_line();
+    Sensors::instance().log();
+
+    log_battery();
+    print_message();
 }

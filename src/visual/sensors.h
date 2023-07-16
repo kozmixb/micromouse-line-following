@@ -8,7 +8,7 @@
 class Sensors {
    public:
     static Sensors& instance();
-    void test();
+    void log();
     void enable();
     Sensor& right();
     Sensor& front_right();

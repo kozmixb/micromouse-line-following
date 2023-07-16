@@ -16,5 +16,7 @@ void enable_timer_interrupt() {
 
 ISR(TIMER2_COMPA_vect, ISR_NOBLOCK) {
     update_sensors();
+    update_switch();
+    update_battery();
     start_sensor_cycle();
 }

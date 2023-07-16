@@ -3,20 +3,22 @@
 #include <wiring_private.h>
 
 #include "config.h"
+#include "utils/battery.h"
+#include "utils/switch.h"
 #include "visual/emitters.h"
 #include "visual/sensors.h"
 
-static volatile int adc[4];
+static volatile int adc[6];
 static uint8_t sensor_phase = 0;
 static const uint8_t ADC_REF = DEFAULT;
 
 enum {
-    EMITTERS_OFF,
+    READ_BATTERY,
     DARK_RIGHT,
     DARK_FRONT_RIGHT,
     DARK_FRONT_LEFT,
     DARK_LEFT,
-    EMITTERS_ON,
+    READ_SWITCH,
     BRIGHT_RIGHT,
     BRIGHT_FRONT_RIGHT,
     BRIGHT_FRONT_LEFT,
@@ -55,60 +57,66 @@ static int get_adc_result() {
 }
 
 void update_sensors() {
-    Sensors::instance().right().update(adc[0]);
-    Sensors::instance().front_right().update(adc[1]);
-    Sensors::instance().front_left().update(adc[2]);
-    Sensors::instance().left().update(adc[3]);
+    Sensors::instance().right().update(adc[1]);
+    Sensors::instance().front_right().update(adc[2]);
+    Sensors::instance().front_left().update(adc[3]);
+    Sensors::instance().left().update(adc[4]);
 }
+
+void update_battery() { update_battery_voltage(adc[0]); }
+
+void update_switch() { update_switch_status(adc[0]); }
 
 void start_sensor_cycle() {
     emitters_off();
     sensor_phase = 0;
-    bitSet(ADCSRA, ADIE);  // enable the ADC interrupt
-    start_adc(0);          // begin a conversion to get things started
+    bitSet(ADCSRA, ADIE);    // enable the ADC interrupt
+    start_adc(BATTERY_PIN);  // begin a conversion to get things started
 }
 
 static void stop_sensor_cycle() { bitClear(ADCSRA, ADIE); }
 
 ISR(ADC_vect) {
     switch (sensor_phase) {
-        case EMITTERS_OFF:
+        case READ_BATTERY:
+            adc[0] = get_adc_result();
             start_adc(Sensors::instance().right().pin());
             break;
         case DARK_RIGHT:
-            adc[0] = get_adc_result();
+            adc[1] = get_adc_result();
             start_adc(Sensors::instance().front_right().pin());
             break;
         case DARK_FRONT_RIGHT:
-            adc[1] = get_adc_result();
+            adc[2] = get_adc_result();
             start_adc(Sensors::instance().front_left().pin());
             break;
         case DARK_FRONT_LEFT:
-            adc[2] = get_adc_result();
+            adc[3] = get_adc_result();
             start_adc(Sensors::instance().left().pin());
             break;
         case DARK_LEFT:
-            adc[3] = get_adc_result();
+            adc[4] = get_adc_result();
             emitters_on();
-            start_adc(0);
+            start_adc(FUNCTION_PIN);
             break;
-        case EMITTERS_ON:
+        case READ_SWITCH:
+            adc[5] = get_adc_result();
             start_adc(Sensors::instance().right().pin());
             break;
         case BRIGHT_RIGHT:
-            adc[0] = adc[0] - get_adc_result();
+            adc[1] = adc[1] - get_adc_result();
             start_adc(Sensors::instance().front_right().pin());
             break;
         case BRIGHT_FRONT_RIGHT:
-            adc[1] = adc[1] - get_adc_result();
+            adc[2] = adc[2] - get_adc_result();
             start_adc(Sensors::instance().front_left().pin());
             break;
         case BRIGHT_FRONT_LEFT:
-            adc[2] = adc[2] - get_adc_result();
+            adc[3] = adc[3] - get_adc_result();
             start_adc(Sensors::instance().left().pin());
             break;
         case BRIGHT_LEFT:
-            adc[3] = adc[3] - get_adc_result();
+            adc[4] = adc[4] - get_adc_result();
             emitters_off();
             stop_sensor_cycle();
             break;

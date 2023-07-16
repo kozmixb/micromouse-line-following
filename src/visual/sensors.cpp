@@ -1,7 +1,5 @@
 #include "sensors.h"
 
-#include <Arduino.h>
-
 #include "config.h"
 #include "debug.h"
 #include "sensor.h"
@@ -24,13 +22,12 @@ void Sensors::enable() {
     }
 }
 
-void Sensors::test() {
-    if (millis() % SENSOR_INTERVAL == 0) {
-        log_message("SLeft: " + String(sensor_left.read()));
-        log_message("SFLeft: " + String(sensor_front_left.read()));
-        log_message("SFRigh: " + String(sensor_front_right.read()));
-        log_message("SRight: " + String(sensor_right.read()));
-    }
+void Sensors::log() {
+    add_message(String("sensor_left"), String(sensor_left.read()));
+    add_message(String("sensor_front_left"), String(sensor_front_left.read()));
+    add_message(String("sensor_front_right"),
+                String(sensor_front_right.read()));
+    add_message(String("sensor_right"), String(sensor_right.read()));
 }
 
 Sensor& Sensors::right() { return sensor_right; }

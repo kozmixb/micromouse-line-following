@@ -27,9 +27,9 @@ void indicators_off() {
 }
 
 void indicators_test() {
-    if ((millis() / DEBUG_INTERVAL / 2) % 2) {
+    if ((millis() / 200 / 2) % 2) {
         if (digitalRead(LED_LEFT) == LOW) {
-            log_message("Active Indicator: LEFT");
+            add_message(String("active_indicator"), String("LEFT"));
         }
 
         indicator_left();
@@ -37,7 +37,7 @@ void indicators_test() {
     }
 
     if (digitalRead(LED_RIGHT) == LOW) {
-        log_message("Active Indicator: RIGHT");
+        add_message(String("active_indicator"), String("RIGHT"));
     }
 
     indicator_right();
