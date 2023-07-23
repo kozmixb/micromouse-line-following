@@ -33,6 +33,7 @@ void add_message(String key, String value) {
 
 void add_message(String key, int value) { add_message(key, String(value)); }
 void add_message(String key, float value) { add_message(key, String(value)); }
+void add_message(String key, byte value) { add_message(key, String(value)); }
 
 void print_message() {
     if (enabled && (millis() - last >= 500) && length > 0) {

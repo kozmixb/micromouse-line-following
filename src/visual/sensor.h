@@ -13,6 +13,8 @@ class Sensor {
    private:
     uint8_t _pin;
     int _value;
+    int _min;
+    int _max;
 };
 
 #endif

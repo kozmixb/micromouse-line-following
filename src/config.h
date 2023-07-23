@@ -44,4 +44,8 @@ static const float ADC_REF_VOLTS = 4.987;  // Reference voltage of ADC
 const float BATTERY_MULTIPLIER =
     (ADC_REF_VOLTS / ADC_FSR / BATTERY_DIVIDER_RATIO);
 
+const float WHEEL_DIAMETER = 31.966;  // 33.298
+
+const float MOUSE_RADIUS = 37.92;  // 39.50;
+
 #endif
