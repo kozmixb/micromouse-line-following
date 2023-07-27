@@ -1,7 +1,8 @@
+#include "debug.h"
+
 #include <Arduino.h>
 
 #include "config.h"
-#include "data/item.h"
 
 static bool enabled = false;
 static byte length = 0;

@@ -1,6 +1,8 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
-void run_profile(byte profile);
+#include <Controller/MotorControl.h>
+
+void run_profile(byte profile, MotorControl motors);
 
 #endif

@@ -1,24 +1,10 @@
-#include "motors.h"
-
 #include <Arduino.h>
+#include <Controller/MotorControl.h>
 #include <digitalWriteFast.h>
 
 #include "config.h"
-#include "debug.h"
 
-void setup_motors() {
-    pinMode(MOTOR_LEFT_DIR, OUTPUT);
-    pinMode(MOTOR_RIGHT_DIR, OUTPUT);
-    pinMode(MOTOR_LEFT_PWM, OUTPUT);
-    pinMode(MOTOR_RIGHT_PWM, OUTPUT);
-    digitalWriteFast(MOTOR_LEFT_PWM, 0);
-    digitalWriteFast(MOTOR_LEFT_DIR, 0);
-    digitalWriteFast(MOTOR_RIGHT_PWM, 0);
-    digitalWriteFast(MOTOR_RIGHT_DIR, 0);
-    set_motor_pwm_frequency();
-}
-
-void set_left_motor_pwm(int pwm) {
+static void set_left_pwm(int pwm) {
     pwm = MOTOR_LEFT_POLARITY * constrain(pwm, -255, 255);
 
     if (pwm < 0) {
@@ -31,7 +17,7 @@ void set_left_motor_pwm(int pwm) {
     analogWrite(MOTOR_LEFT_PWM, pwm);
 }
 
-void set_right_motor_pwm(int pwm) {
+static void set_right_pwm(int pwm) {
     pwm = MOTOR_RIGHT_POLARITY * constrain(pwm, -255, 255);
 
     if (pwm < 0) {
@@ -44,7 +30,24 @@ void set_right_motor_pwm(int pwm) {
     analogWrite(MOTOR_RIGHT_PWM, pwm);
 }
 
-void set_motor_pwm_frequency(int frequency) {
+void MotorControl::init() {
+    pinMode(MOTOR_LEFT_DIR, OUTPUT);
+    pinMode(MOTOR_RIGHT_DIR, OUTPUT);
+    pinMode(MOTOR_LEFT_PWM, OUTPUT);
+    pinMode(MOTOR_RIGHT_PWM, OUTPUT);
+    digitalWriteFast(MOTOR_LEFT_PWM, 0);
+    digitalWriteFast(MOTOR_LEFT_DIR, 0);
+    digitalWriteFast(MOTOR_RIGHT_PWM, 0);
+    digitalWriteFast(MOTOR_RIGHT_DIR, 0);
+    setFrequency();
+}
+
+void MotorControl::setSpeed(int left, int right) {
+    set_left_pwm(left);
+    set_right_pwm(right);
+}
+
+void MotorControl::setFrequency(int frequency) {
     switch (frequency) {
         case PWM_31250_HZ:
             // Divide by 1. frequency = 31.25 kHz;
@@ -65,24 +68,4 @@ void set_motor_pwm_frequency(int frequency) {
             bitSet(TCCR1B, CS10);
             break;
     }
-}
-
-void motors_test() {
-    if ((millis() / 500) % 2) {
-        if (digitalRead(MOTOR_RIGHT_DIR) == 255) {
-            add_message(String("motor_direction"), String("RIGHT"));
-        }
-
-        set_left_motor_pwm(-255);
-        set_right_motor_pwm(255);
-
-        return;
-    }
-
-    if (digitalRead(MOTOR_LEFT_DIR) == 255) {
-        add_message(String("motor_direction"), String("LEFT"));
-    }
-
-    set_left_motor_pwm(255);
-    set_right_motor_pwm(-255);
 }

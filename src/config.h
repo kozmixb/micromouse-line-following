@@ -11,8 +11,8 @@ const uint8_t MOTOR_LEFT_DIR = 7;
 const uint8_t MOTOR_RIGHT_DIR = 8;
 const uint8_t MOTOR_LEFT_PWM = 9;
 const uint8_t MOTOR_RIGHT_PWM = 10;
-const int MOTOR_LEFT_POLARITY = (1);
-const int MOTOR_RIGHT_POLARITY = (1);
+const int MOTOR_LEFT_POLARITY = (-1);
+const int MOTOR_RIGHT_POLARITY = (-1);
 
 // Indicators
 const uint8_t LED_RIGHT = 6;
@@ -44,8 +44,10 @@ static const float ADC_REF_VOLTS = 4.987;  // Reference voltage of ADC
 const float BATTERY_MULTIPLIER =
     (ADC_REF_VOLTS / ADC_FSR / BATTERY_DIVIDER_RATIO);
 
-const float WHEEL_DIAMETER = 31.966;  // 33.298
+static const float WHEEL_DIAMETER = 31.966;  // 33.298
+const float WHEEL_CIRCUMFENCE = WHEEL_DIAMETER * PI;
 
 const float MOUSE_RADIUS = 37.92;  // 39.50;
+const float MOUSE_CIRCUMFENCE = 2 * PI * MOUSE_RADIUS;
 
 #endif
